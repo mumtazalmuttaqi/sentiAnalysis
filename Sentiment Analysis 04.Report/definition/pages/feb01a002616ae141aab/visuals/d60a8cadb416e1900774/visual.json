@@ -1,0 +1,154 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
+  "name": "d60a8cadb416e1900774",
+  "position": {
+    "x": 750.8312342569269,
+    "y": 124.23173803526447,
+    "z": 3000,
+    "height": 244.83627204030225,
+    "width": 471.536523929471,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Tabel Dataset Olist yang digunakan:",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Semibold",
+                      "fontSize": "14pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Olah Data Total Order dan Revenue"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "olist_order_dataset",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "14pt",
+                      "textDecoration": "underline"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "olist_order_payment_dataset",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "14pt"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "olist_order_items_dataset",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "14pt"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "olist_product_dataset",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "14pt"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "olist_category_name_translation_dataset",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "14pt"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Olah Data Sentimen Analisis (Positif & Negatif)"
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "olist_order_review_dataset",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "14pt",
+                      "textDecoration": "underline"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

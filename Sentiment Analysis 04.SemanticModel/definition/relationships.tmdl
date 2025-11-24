@@ -1,0 +1,58 @@
+relationship aa70dada-7689-4ed2-8538-f438b13f3a2c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: olist_orders_dataset.order_purchase_timestamp
+	toColumn: LocalDateTable_86d5d59e-af5d-46b5-95df-8a05287004ee.Date
+
+relationship cfcd76eb-e516-44d0-a500-656663101ede
+	joinOnDateBehavior: datePartOnly
+	fromColumn: olist_orders_dataset.order_approved_at
+	toColumn: LocalDateTable_24ab7f58-1fea-41d9-8e44-34cdc822dc05.Date
+
+relationship eddbe4d0-3b95-4d77-a262-e6f9aa78021e
+	joinOnDateBehavior: datePartOnly
+	fromColumn: olist_orders_dataset.order_delivered_carrier_date
+	toColumn: LocalDateTable_3504ba03-e51b-4018-a724-201a1b26124a.Date
+
+relationship 93e348d5-4e45-47c2-b783-85e5a623bf6d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: olist_orders_dataset.order_delivered_customer_date
+	toColumn: LocalDateTable_2efd2043-e809-4231-b15c-cd4e305baedf.Date
+
+relationship f1d331d9-1377-429d-b830-6564f423d581
+	joinOnDateBehavior: datePartOnly
+	fromColumn: olist_orders_dataset.order_estimated_delivery_date
+	toColumn: LocalDateTable_c211c71e-ba7e-4361-be40-d2a3a3e2307b.Date
+
+relationship ff7e36e6-5266-48a8-8717-9769b0f7e4c2
+	joinOnDateBehavior: datePartOnly
+	fromColumn: olist_order_items_dataset.shipping_limit_date
+	toColumn: LocalDateTable_eec620ef-8d8c-423d-8195-d1e9d62e4232.Date
+
+relationship AutoDetected_b1f34f6c-4106-44d8-aae9-cf22723c0cb0
+	crossFilteringBehavior: bothDirections
+	fromColumn: olist_order_items_dataset.order_id
+	toColumn: olist_orders_dataset.order_id
+
+relationship AutoDetected_5d487fce-2c24-41dd-a40d-4add2fabd1c9
+	crossFilteringBehavior: bothDirections
+	fromColumn: olist_order_items_dataset.product_id
+	toColumn: olist_products_dataset.product_id
+
+relationship AutoDetected_5a03116c-8744-4a1b-8c12-a9588285ae3e
+	fromColumn: olist_products_dataset.'product_category_name_translation.product_category_name_english'
+	toColumn: product_category_name_translation.product_category_name_english
+
+relationship AutoDetected_95e6ba8d-34a6-4b96-a2d7-acaae3766aef
+	fromColumn: olist_order_reviews_dataset.order_id
+	toColumn: olist_orders_dataset.order_id
+
+relationship ace082b9-1fdf-4cbb-9566-fa01005ff042
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: olist_orders_dataset.customer_id
+	toColumn: olist_customers_dataset.customer_id
+
+relationship AutoDetected_94be3acd-b040-4b22-bce3-55a274c62c7f
+	fromColumn: olist_order_payments_dataset.order_id
+	toColumn: olist_orders_dataset.order_id
+

@@ -1,0 +1,142 @@
+table olist_order_reviews_dataset
+	lineageTag: a8365838-1785-4b73-9470-5fc91fc5007b
+
+	measure 'Total Reviews' = ```
+			
+			COUNTROWS('olist_order_reviews_dataset')
+			
+			```
+		formatString: 0
+		lineageTag: 408dfea3-1e4c-4a56-bf93-9bc90c1ad44d
+
+	measure 'Total Positive' = ```
+			
+			CALCULATE(
+			    [Total Reviews],'olist_order_reviews_dataset'[sentiment] = "POSITIVE"
+			)
+			
+			```
+		formatString: 0
+		lineageTag: deb5a1f6-d284-4fa8-80c6-246b708f7b62
+
+	measure 'Total Negative' = ```
+			
+			CALCULATE(
+			    [Total Reviews],
+			    'olist_order_reviews_dataset'[sentiment]= "NEGATIVE"
+			)
+			
+			```
+		formatString: 0
+		lineageTag: d7a5e28a-1a22-46a8-8db1-ec875098a86b
+
+	column review_id
+		dataType: string
+		lineageTag: 6bcf0626-d021-4c2a-abbc-18feb2d3843f
+		summarizeBy: none
+		sourceColumn: review_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_id
+		dataType: string
+		lineageTag: e434a551-d8c3-45e5-a7f0-f9d08bb1f248
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column score
+		dataType: int64
+		formatString: 0
+		lineageTag: 7263ac20-b4e2-4d37-8b23-d0ee277c1030
+		summarizeBy: sum
+		sourceColumn: score
+
+		annotation SummarizationSetBy = Automatic
+
+	column comment
+		dataType: string
+		lineageTag: ddfad90f-b8df-40a2-b85d-41f3ab8dd30b
+		summarizeBy: none
+		sourceColumn: comment
+
+		annotation SummarizationSetBy = Automatic
+
+	column clean
+		dataType: string
+		lineageTag: 2e2c0150-1d25-4ca7-b48c-6942556acc7d
+		summarizeBy: none
+		sourceColumn: clean
+
+		annotation SummarizationSetBy = Automatic
+
+	column sentiment
+		dataType: string
+		lineageTag: 0a4af819-fcdc-430c-8c57-b97d9d1e9e46
+		summarizeBy: none
+		sourceColumn: sentiment
+
+		annotation SummarizationSetBy = Automatic
+
+	column compound
+		dataType: int64
+		formatString: 0
+		lineageTag: 7ccba676-f9cc-4670-a708-27100b0c962c
+		summarizeBy: sum
+		sourceColumn: compound
+
+		annotation SummarizationSetBy = Automatic
+
+	column pos
+		dataType: int64
+		formatString: 0
+		lineageTag: 64ea803f-58d9-4c64-939e-7022bc6b1911
+		summarizeBy: sum
+		sourceColumn: pos
+
+		annotation SummarizationSetBy = Automatic
+
+	column neu
+		dataType: int64
+		formatString: 0
+		lineageTag: 7a910191-d349-4f15-9a76-e09c53f16a19
+		summarizeBy: sum
+		sourceColumn: neu
+
+		annotation SummarizationSetBy = Automatic
+
+	column neg
+		dataType: int64
+		formatString: 0
+		lineageTag: 69cebbf7-d611-4534-9d95-c7aaf83cb562
+		summarizeBy: sum
+		sourceColumn: neg
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'clean wordcloud'
+		dataType: string
+		lineageTag: 0584907c-89b0-4e4f-8c13-0ffa7cb9d59c
+		summarizeBy: none
+		sourceColumn: clean wordcloud
+
+		annotation SummarizationSetBy = Automatic
+
+	partition olist_order_reviews_dataset = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\Download\Olist E-Commerce Dataset\olist_order_reviews_dataset.csv"),[Delimiter=",", Columns=7, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"review_id", type text}, {"order_id", type text}, {"review_score", Int64.Type}, {"review_comment_title", type text}, {"review_comment_message", type text}, {"review_creation_date", type datetime}, {"review_answer_timestamp", type datetime}}),
+				    #"Run Python script" = Python.Execute("# Input dataset dari Power BI#(lf)import pandas as pd#(lf)import re#(lf)from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer#(lf)#(lf)# -----------------------------#(lf)# 1. Copy dataset & pilih kolom penting#(lf)# -----------------------------#(lf)df = dataset.copy()#(lf)#(lf)# Sertakan review_id, order_id, review_score, review_comment_message#(lf)df = df.loc[:, ['review_id', 'order_id', 'review_score','review_comment_message']].dropna(subset=['review_comment_message']).reset_index(drop=True)#(lf)#(lf)# Rename kolom review_score & review_comment_message supaya konsisten#(lf)df.rename(columns={'review_score':'score', 'review_comment_message':'comment'}, inplace=True)#(lf)#(lf)# -----------------------------#(lf)# 2. Cleaning ringan (mirip Kaggle)#(lf)# -----------------------------#(lf)df['clean'] = df['comment']#(lf)df['clean'] = df['clean'].apply(lambda x: re.sub(r'(www\.[^\s]+)|(https?://[^\s]+)', '', str(x)))#(lf)df['clean'] = df['clean'].str.lower()#(lf)#(lf)# -----------------------------#(lf)# 3. Load lexicon VADER Portugis Olist#(lf)# -----------------------------#(lf)lexicon_path = r""D:\PythonVenv\PowerBi\lexicons\vader_lexicon_ptbr.txt""#(lf)analyzer = SentimentIntensityAnalyzer(lexicon_file=lexicon_path)#(lf)#(lf)# -----------------------------#(lf)# 4. Sentiment analysis: POSITIVE/NEGATIVE only#(lf)# -----------------------------#(lf)def get_sentiment_no_neutral(text):#(lf)    scores = analyzer.polarity_scores(text)#(lf)    compound = scores['compound']#(lf)#(lf)    # POSITIVE/NEGATIVE#(lf)    if compound > 0:#(lf)        sentiment = 'POSITIVE'#(lf)    elif compound < 0:#(lf)        sentiment = 'NEGATIVE'#(lf)    else:  # compound = 0#(lf)        # Bandingkan pos vs neg dengan bobot 1.2 ke negatif untuk lebih banyak negatif#(lf)        if scores['pos'] < scores['neg'] * 1.2:#(lf)            sentiment = 'NEGATIVE'#(lf)        else:#(lf)            sentiment = 'POSITIVE'#(lf)#(lf)    return pd.Series([sentiment, compound, scores['pos'], scores['neu'], scores['neg']])#(lf)#(lf)df[['sentiment','compound','pos','neu','neg']] = df['clean'].apply(get_sentiment_no_neutral)#(lf)#(lf)df['clean wordcloud'] = df['clean'] #(lf)#(lf)# -----------------------------#(lf)# 5. Output ke Power BI#(lf)# -----------------------------#(lf)cleaned_df_final = df#(lf)",[dataset=#"Changed Type"]),
+				    df = #"Run Python script"{[Name="df"]}[Value],
+				    #"Changed Type1" = Table.TransformColumnTypes(df,{{"review_id", type text}, {"order_id", type text}, {"score", Int64.Type}, {"comment", type text}, {"clean", type text}, {"sentiment", type text}, {"compound", Int64.Type}, {"pos", Int64.Type}, {"neu", Int64.Type}, {"neg", Int64.Type}, {"clean wordcloud", type text}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

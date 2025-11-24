@@ -1,0 +1,10 @@
+// Welcome to DAX query view! Learn more about DAX queries at https://aka.ms/dax-queries.
+// Right-click on tables, columns, or measures in the data pane to access quick queries, or ask Copilot for help writing DAX.
+Duplicate Order Table =
+FILTER(
+    ADDCOLUMNS(
+        SUMMARIZE(olist_orders_dataset, olist_orders_dataset[order_id]),
+        "CountOrders", COUNTROWS(FILTER(olist_orders_dataset, olist_orders_dataset[order_id] = EARLIER(olist_orders_dataset[order_id])))
+    ),
+    [CountOrders] > 1
+)

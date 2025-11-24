@@ -1,0 +1,82 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
+  "name": "dba8f2f45bb6b35c72d6",
+  "position": {
+    "x": 750.8312342569269,
+    "y": 369.06801007556675,
+    "z": 1000,
+    "height": 147.80856423173802,
+    "width": 424.38287153652391,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Metrik/indikator yang Digunakan:",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Semibold",
+                      "fontSize": "14pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Sentimen Score: Negatif: <0, Positif: >0",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "14pt",
+                      "textDecoration": "underline"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Jumlah Order",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "14pt",
+                      "textDecoration": "underline"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Jumlah Payment Masuk",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "14pt"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

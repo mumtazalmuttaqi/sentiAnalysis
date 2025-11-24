@@ -1,0 +1,34 @@
+table product_category_name_translation
+	lineageTag: 8fd1a631-f193-438d-9781-50d8d4291260
+
+	column product_category_name
+		dataType: string
+		lineageTag: 301cc77e-7202-4804-9b02-13027e3b180e
+		summarizeBy: none
+		sourceColumn: product_category_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_category_name_english
+		dataType: string
+		lineageTag: 64164378-47a9-4074-81bd-f441428a80ed
+		summarizeBy: none
+		sourceColumn: product_category_name_english
+
+		annotation SummarizationSetBy = Automatic
+
+	partition product_category_name_translation = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\Download\Olist E-Commerce Dataset\product_category_name_translation.csv"),[Delimiter=",", Columns=2, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}, {"Column2", type text}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"Column1", "product_category_name"}, {"Column2", "product_category_name_english"}}),
+				    #"Removed Top Rows" = Table.Skip(#"Renamed Columns",1)
+				in
+				    #"Removed Top Rows"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

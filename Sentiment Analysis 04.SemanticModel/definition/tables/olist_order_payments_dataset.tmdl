@@ -1,0 +1,60 @@
+table olist_order_payments_dataset
+	lineageTag: 5bdb32e4-2377-41e5-8e80-08cc223ddade
+
+	column order_id
+		dataType: string
+		lineageTag: 422589d2-62ab-401c-b625-25e8e5b95f29
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column payment_sequential
+		dataType: int64
+		formatString: 0
+		lineageTag: c939c516-b6c6-45d6-b15d-68637a9e8784
+		summarizeBy: sum
+		sourceColumn: payment_sequential
+
+		annotation SummarizationSetBy = Automatic
+
+	column payment_type
+		dataType: string
+		lineageTag: fbeb8cea-89dd-4a1e-8330-6365e3ed912d
+		summarizeBy: none
+		sourceColumn: payment_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column payment_installments
+		dataType: int64
+		formatString: 0
+		lineageTag: 8a6da8c7-f5ff-490a-9507-54764b24e4bc
+		summarizeBy: sum
+		sourceColumn: payment_installments
+
+		annotation SummarizationSetBy = Automatic
+
+	column payment_value
+		dataType: int64
+		formatString: "R$"\ #,0;-"R$"\ #,0;"R$"\ #,0
+		lineageTag: 030d013f-dd87-4d18-aab3-1b79414170c8
+		summarizeBy: sum
+		sourceColumn: payment_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	partition olist_order_payments_dataset = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\Download\Olist E-Commerce Dataset\olist_order_payments_dataset.csv"),[Delimiter=",", Columns=5, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"order_id", type text}, {"payment_sequential", Int64.Type}, {"payment_type", type text}, {"payment_installments", Int64.Type}, {"payment_value", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+

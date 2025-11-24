@@ -1,0 +1,56 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
+  "name": "163fa55f50dd35b5be7d",
+  "position": {
+    "x": 750.8312342569269,
+    "y": 532.29219143576825,
+    "z": 4000,
+    "height": 148.7153652392947,
+    "width": 529.57178841309815,
+    "tabOrder": 4000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Model untuk Sentiment Analysis",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Semibold",
+                      "fontSize": "14pt"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Vader Lexicon Khusus Bahasa Portugis ( Vader + leai lexicon)",
+                    "textStyle": {
+                      "fontFamily": "Segoe UI Light",
+                      "fontSize": "14pt"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

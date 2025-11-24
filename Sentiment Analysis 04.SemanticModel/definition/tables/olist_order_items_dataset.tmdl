@@ -1,0 +1,87 @@
+table olist_order_items_dataset
+	lineageTag: 3b24cb24-6316-4de6-b8de-4d1fc0cfe569
+
+	column order_id
+		dataType: string
+		lineageTag: a5704b98-ef35-4a66-9965-1fbf491e067d
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_item_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 0d5cff43-8775-4a5b-8395-0c4fd5e1d1c5
+		summarizeBy: sum
+		sourceColumn: order_item_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_id
+		dataType: string
+		lineageTag: 385ffa06-b4bd-441c-a72f-f4427e60ed0e
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column seller_id
+		dataType: string
+		lineageTag: 310e68e6-f42a-4e72-b8e4-2c30c0ffb96d
+		summarizeBy: none
+		sourceColumn: seller_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column shipping_limit_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 85ae8b96-53e5-429e-9b3a-1178a2e98f35
+		summarizeBy: none
+		sourceColumn: shipping_limit_date
+
+		variation Variation
+			isDefault
+			relationship: ff7e36e6-5266-48a8-8717-9769b0f7e4c2
+			defaultHierarchy: LocalDateTable_eec620ef-8d8c-423d-8195-d1e9d62e4232.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column price
+		dataType: int64
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: bdc90ede-ca8a-49fd-9672-717f5a944fd2
+		summarizeBy: sum
+		sourceColumn: price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column freight_value
+		dataType: int64
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		lineageTag: d6d65955-9a96-4245-951f-a227f2cc5a20
+		summarizeBy: sum
+		sourceColumn: freight_value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	partition olist_order_items_dataset = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("D:\Download\Olist E-Commerce Dataset\olist_order_items_dataset.csv"),[Delimiter=",", Columns=7, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"order_id", type text}, {"order_item_id", Int64.Type}, {"product_id", type text}, {"seller_id", type text}, {"shipping_limit_date", type datetime}, {"price", Int64.Type}, {"freight_value", Int64.Type}}),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Changed Type",{"order_id", "shipping_limit_date", "order_item_id", "product_id", "seller_id", "price", "freight_value"})
+				in
+				    #"Reordered Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

@@ -1,0 +1,227 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
+  "name": "9e7d2cbcb3d849275a10",
+  "position": {
+    "x": 1024,
+    "y": 535,
+    "z": 9000,
+    "height": 167,
+    "width": 239,
+    "tabOrder": 9000
+  },
+  "visual": {
+    "visualType": "WordCloud1447959067750",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "olist_order_reviews_dataset"
+                    }
+                  },
+                  "Property": "clean"
+                }
+              },
+              "queryRef": "olist_order_reviews_dataset (2).clean",
+              "nativeQueryRef": "clean"
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "olist_order_reviews_dataset"
+                    }
+                  },
+                  "Property": "Total Negative"
+                }
+              },
+              "queryRef": "olist_order_reviews_dataset.Total Negative",
+              "nativeQueryRef": "Total Negative"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "performance": [
+        {
+          "properties": {
+            "quality": {
+              "expr": {
+                "Literal": {
+                  "Value": "50D"
+                }
+              }
+            },
+            "preestimate": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dataPoint": [
+        {
+          "properties": {
+            "isShowAll": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "defaultColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#D64550'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "general": [
+        {
+          "properties": {
+            "isPunctuationsCharacters": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "maxNumberOfWords": {
+              "expr": {
+                "Literal": {
+                  "Value": "150D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "stopWords": [
+        {
+          "properties": {
+            "words": {
+              "expr": {
+                "Literal": {
+                  "Value": "'não e a o em produto da do de com muito'"
+                }
+              }
+            },
+            "isDefaultStopWords": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "rotateText": [
+        {
+          "properties": {
+            "minAngle": {
+              "expr": {
+                "Literal": {
+                  "Value": "-90D"
+                }
+              }
+            },
+            "maxAngle": {
+              "expr": {
+                "Literal": {
+                  "Value": "90D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Kata Negatif'"
+                }
+              }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": -0.2
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 0,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}
