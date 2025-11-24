@@ -75,25 +75,7 @@ Visual comparison of positive vs negative sentiment for each product category.
 ---
 
 ## 💰 Total Payment by Category
-Ranking of product categories based on revenue contribution.
-
----
-
-## 📁 Repository Structure
-```
-/Olist-Ecommerce-Dashboard/
-│
-├── README.md
-├── dashboard.pbix
-├── /images/
-│   └── dashboard_preview.png
-├── /python/
-│   ├── preprocessing.py
-│   ├── sentiment_leia.py
-│   └── wordcloud_generator.py
-└── /data/
-    └── olist_processed.csv
-```
+Ranking of product categories based on revenue contribution
 
 ---
 
